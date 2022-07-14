@@ -1,10 +1,12 @@
 getwd()
 
-library(dplyr)
+library(tidyverse)
 library(survey)
 library(foreign)
 
-sdem22<-read_cvs("data/ocupados_22.csv")
+sdem22<-read_csv("data/ocupados_22.csv")
+
+
 
 class(sdem22)
 names(sdem22)
