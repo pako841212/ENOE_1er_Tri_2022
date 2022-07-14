@@ -4,7 +4,8 @@ library(dplyr)
 library(survey)
 library(foreign)
 
-sdem22<-read.dbf("ENOEN_SDEMT122.dbf")
+sdem22<-read_cvs("data/ocupados_22.csv")
+
 class(sdem22)
 names(sdem22)
 head(sdem22)
