@@ -1,0 +1,10 @@
+version: "3.1"
+services:
+  enoe:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: enoe_pako
+    command: bash
+    volumes:
+      - $PWD:/workdir
