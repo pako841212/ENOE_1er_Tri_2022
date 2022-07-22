@@ -22,10 +22,13 @@ sdem22 %>%
   get_older_than_15_years() %>%
   summarise(POBLACION_15omas=sum(fac_tri))
 ## Hom
+get_men <- function(data) {
+  return(data %>% filter(sex==1))
+}
 
-sdem22 %>% filter(r_def=="00",
-                  c_res==1|c_res==3,sex==1,
-                  eda>=15 & eda<=98)%>%
+sdem22 %>%
+  get_older_than_15_years() %>%
+  get_men() %>%
   summarise(POBLACION_15omas_H=sum(fac_tri))
 ## Muj
 
