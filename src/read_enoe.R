@@ -1,7 +1,4 @@
-getwd()
-
 library(tidyverse)
-
 library(survey)
 library(foreign)
 
@@ -19,7 +16,7 @@ sdem22$fac_tri
 sdem22$eda=as.numeric(as.character(sdem22$eda))
 class(sdem22$eda)
 
-#Población total
+#Poblaciï¿½n total
 
 sdem22 %>% filter(r_def=="00", c_res==1|c_res==3)%>% summarise(POBLACION=sum(fac_tri))
 
@@ -187,7 +184,7 @@ sdem22%>% filter(r_def=="00",
   summarise(PnDis_M=sum(fac_tri))
 
 
-# Población total para Sonora
+# Poblaciï¿½n total para Sonora
 
 sdem22 %>% filter(R_DEF=="00", C_RES==1|C_RES==3,ENT==26)%>% 
     summarise(POBLACION_total_SON=sum(FAC_TRI))
@@ -356,7 +353,7 @@ sdem22%>% filter(R_DEF=="00",
 
 
 
-#Población ocupada y remunera
+#Poblaciï¿½n ocupada y remunera
 
 ocupados22=sdem22 %>% 
   filter(CLASE2 == 1,
