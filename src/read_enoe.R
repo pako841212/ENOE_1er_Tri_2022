@@ -6,15 +6,7 @@ sdem22<-read_csv("data/ocupados_22.csv")
 
 
 
-class(sdem22)
-names(sdem22)
-head(sdem22)
-
-sum(sdem22$fac_tri)
-sdem22$fac_tri
-
 sdem22$eda=as.numeric(as.character(sdem22$eda))
-class(sdem22$eda)
 
 #Poblaci�n total
 
