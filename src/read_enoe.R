@@ -12,6 +12,10 @@ sdem22$eda=as.numeric(as.character(sdem22$eda))
 
 sdem22 %>% filter(r_def=="00", c_res==1|c_res==3)%>% summarise(POBLACION=sum(fac_tri))
 
+get_older_than_15_years <- function(original) {
+  older_than_15_years <- original %>% filter(eda>=15 & eda<=98)
+  return(older_than_15_years)
+}
 
 #Población de 15 años o más
 sdem22 %>% filter(r_def=="00",
