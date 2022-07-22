@@ -49,3 +49,4 @@ sdem22 %>%
   get_older_than_15_years() %>%
   group_by_sex() %>%
   summarise(POBLACION = sum(fac_tri))
+
