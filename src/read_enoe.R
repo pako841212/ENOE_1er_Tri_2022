@@ -2,10 +2,7 @@ library(tidyverse)
 library(survey)
 library(foreign)
 
-sdem22<-read_csv("data/ocupados_22.csv")
-
-
-
+sdem22<-read_csv("data/ocupados_22.csv", `show_col_types = FALSE)
 sdem22$eda=as.numeric(as.character(sdem22$eda))
 
 #Poblaci�n total
@@ -39,4 +36,16 @@ get_women <- function(data) {
 sdem22 %>%
   get_older_than_15_years() %>%
   get_women() %>%
+  summarise(POBLACION_15omas_M=sum(fac_tri))
+
+group_by_sex <- function(data) {
+  grouped_data <- data %>%
+    mutate(sex = if_else(sex == 1, "man", "woman")) %>%
+    group_by(sex)
+  return(grouped_data)
+}
+
+sdem22 %>%
+  get_older_than_15_years() %>%
+  group_by_sex() %>%
   summarise(POBLACION_15omas_M=sum(fac_tri))
