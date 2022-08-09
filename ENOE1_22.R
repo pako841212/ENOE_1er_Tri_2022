@@ -1,186 +1,190 @@
 getwd()
 
-library(dplyr)
+library(tidyverse)
+
 library(survey)
 library(foreign)
 
-sdem22<-read.dbf("ENOEN_SDEMT122.dbf")
+sdem22<-read_csv("data/ocupados_22.csv")
+
+
+
 class(sdem22)
 names(sdem22)
 head(sdem22)
 
-sum(sdem22$FAC_TRI)
-sdem22$FAC_TRI
+sum(sdem22$fac_tri)
+sdem22$fac_tri
 
-sdem22$EDA=as.numeric(as.character(sdem22$EDA))
-class(sdem22$EDA)
+sdem22$eda=as.numeric(as.character(sdem22$eda))
+class(sdem22$eda)
 
 #Poblaci�n total
 
-sdem22 %>% filter(R_DEF=="00", C_RES==1|C_RES==3)%>% summarise(POBLACION=sum(FAC_TRI))
+sdem22 %>% filter(r_def=="00", c_res==1|c_res==3)%>% summarise(POBLACION=sum(fac_tri))
 
 
 #Población de 15 años o más
-sdem22 %>% filter(R_DEF=="00",
-                  C_RES==1|C_RES==3,
-                  EDA>=15 & EDA<=98)%>%
-  summarise(POBLACION_15omas=sum(FAC_TRI))
+sdem22 %>% filter(r_def=="00",
+                  c_res==1|c_res==3,
+                  eda>=15 & eda<=98)%>%
+  summarise(POBLACION_15omas=sum(fac_tri))
 ## Hom
 
-sdem22 %>% filter(R_DEF=="00",
-                  C_RES==1|C_RES==3,SEX==1,
-                  EDA>=15 & EDA<=98)%>%
-  summarise(POBLACION_15omas_H=sum(FAC_TRI))
+sdem22 %>% filter(r_def=="00",
+                  c_res==1|c_res==3,sex==1,
+                  eda>=15 & eda<=98)%>%
+  summarise(POBLACION_15omas_H=sum(fac_tri))
 ## Muj
 
-sdem22 %>% filter(R_DEF=="00",
-                  C_RES==1|C_RES==3,SEX==2,
-                  EDA>=15 & EDA<=98)%>%
-  summarise(POBLACION_15omas_M=sum(FAC_TRI))
+sdem22 %>% filter(r_def=="00",
+                  c_res==1|c_res==3,sex==2,
+                  eda>=15 & eda<=98)%>%
+  summarise(POBLACION_15omas_M=sum(fac_tri))
 
 
 
 #Población Economicamente activa
-sdem22%>% filter(R_DEF=="00",
-                 C_RES==1|C_RES==3,
-                 EDA>=15 & EDA<=98,
-                 CLASE1==1)%>%
-  summarise(PEA=sum(FAC_TRI))
+sdem22%>% filter(r_def=="00",
+                 c_res==1|c_res==3,
+                 eda>=15 & eda<=98,
+                 clase1==1)%>%
+  summarise(PEA=sum(fac_tri))
 
 ## hom
 
-sdem22%>% filter(R_DEF=="00",
-                 C_RES==1|C_RES==3,
-                 SEX==1,EDA>=15 & EDA<=98,
-                 CLASE1==1)%>%
-  summarise(PEA_H=sum(FAC_TRI))
+sdem22%>% filter(r_def=="00",
+                 c_res==1|c_res==3,
+                 sex==1,eda>=15 & eda<=98,
+                 clase1==1)%>%
+  summarise(PEA_H=sum(fac_tri))
 
 ## Muj
 
-sdem22%>% filter(R_DEF=="00",
-                 C_RES==1|C_RES==3,
-                 SEX==2,EDA>=15 & EDA<=98,
-                 CLASE1==1)%>%
-  summarise(PEA_M=sum(FAC_TRI))
+sdem22%>% filter(r_def=="00",
+                 c_res==1|c_res==3,
+                 sex==2,eda>=15 & eda<=98,
+                 clase1==1)%>%
+  summarise(PEA_M=sum(fac_tri))
 
 
 # PNEA
-sdem22%>% filter(R_DEF=="00",
-                 C_RES==1|C_RES==3,
-                 EDA>=15 & EDA<=98,
-                 CLASE1==2)%>%
-  summarise(PNEA=sum(FAC_TRI))
+sdem22%>% filter(r_def=="00",
+                 c_res==1|c_res==3,
+                 eda>=15 & eda<=98,
+                 clase1==2)%>%
+  summarise(PNEA=sum(fac_tri))
 
 ## Hom
 
-sdem22%>% filter(R_DEF=="00",
-                 C_RES==1|C_RES==3,SEX==1,
-                 EDA>=15 & EDA<=98,
-                 CLASE1==2)%>%
-  summarise(PNEA_H=sum(FAC_TRI))
+sdem22%>% filter(r_def=="00",
+                 c_res==1|c_res==3,sex==1,
+                 eda>=15 & eda<=98,
+                 clase1==2)%>%
+  summarise(PNEA_H=sum(fac_tri))
 
 ##Muj
 
-sdem22%>% filter(R_DEF=="00",
-                 C_RES==1|C_RES==3,SEX==2,
-                 EDA>=15 & EDA<=98,
-                 CLASE1==2)%>%
-  summarise(PNEA_M=sum(FAC_TRI))
+sdem22%>% filter(r_def=="00",
+                 c_res==1|c_res==3,sex==2,
+                 eda>=15 & eda<=98,
+                 clase1==2)%>%
+  summarise(PNEA_M=sum(fac_tri))
 
 # PO
 
-sdem22%>% filter(R_DEF=="00",
-                 C_RES==1|C_RES==3,
-                 EDA>=15 & EDA<=98,
-                 CLASE2==1)%>%
-  summarise(PO=sum(FAC_TRI))
+sdem22%>% filter(r_def=="00",
+                 c_res==1|c_res==3,
+                 eda>=15 & eda<=98,
+                 clase2==1)%>%
+  summarise(PO=sum(fac_tri))
 
 ## Hom
 
-sdem22%>% filter(R_DEF=="00",
-                 C_RES==1|C_RES==3,SEX==1,
-                 EDA>=15 & EDA<=98,
-                 CLASE2==1)%>%
-  summarise(PO_H=sum(FAC_TRI))
+sdem22%>% filter(r_def=="00",
+                 c_res==1|c_res==3,sex==1,
+                 eda>=15 & eda<=98,
+                 clase2==1)%>%
+  summarise(PO_H=sum(fac_tri))
 
 ## Muj
 
-sdem22%>% filter(R_DEF=="00",
-                 C_RES==1|C_RES==3,SEX==2,
-                 EDA>=15 & EDA<=98,
-                 CLASE2==1)%>%
-  summarise(PO_M=sum(FAC_TRI))
+sdem22%>% filter(r_def=="00",
+                 c_res==1|c_res==3,sex==2,
+                 eda>=15 & eda<=98,
+               clase2==1)%>%
+  summarise(PO_M=sum(fac_tri))
 
 # PD
 
-sdem22%>% filter(R_DEF=="00",
-                 C_RES==1|C_RES==3,
-                 EDA>=15 & EDA<=98,
-                 CLASE2==2)%>%
-  summarise(PD=sum(FAC_TRI))
+sdem22%>% filter(r_def=="00",
+                 c_res==1|c_res==3,
+                 eda>=15 & eda<=98,
+                 clase2==2)%>%
+  summarise(PD=sum(fac_tri))
 ## Hom
-sdem22%>% filter(R_DEF=="00",
-                 C_RES==1|C_RES==3,SEX==1,
-                 EDA>=15 & EDA<=98,
-                 CLASE2==2)%>%
-  summarise(PD_H=sum(FAC_TRI))
+sdem22%>% filter(r_def=="00",
+                 c_res==1|c_res==3,sex==1,
+                 eda>=15 & eda<=98,
+                 clase2==2)%>%
+  summarise(PD_H=sum(fac_tri))
 
 ## Muj
 
-sdem22%>% filter(R_DEF=="00",
-                 C_RES==1|C_RES==3,SEX==2,
-                 EDA>=15 & EDA<=98,
-                 CLASE2==2)%>%
-  summarise(PD_M=sum(FAC_TRI))
+sdem22%>% filter(r_def=="00",
+                 c_res==1|c_res==3,sex==2,
+                 eda>=15 & eda<=98,
+                 clase2==2)%>%
+  summarise(PD_M=sum(fac_tri))
 
 
 # PDis
-sdem22%>% filter(R_DEF=="00",
-                 C_RES==1|C_RES==3,
-                 EDA>=15 & EDA<=98,
-                 CLASE2==3)%>%
-  summarise(PDis=sum(FAC_TRI))
+sdem22%>% filter(r_def=="00",
+                 c_res==1|c_res==3,
+                 eda>=15 & eda<=98,
+                 clase2==3)%>%
+  summarise(PDis=sum(fac_tri))
 
 ##Hom
 
-sdem22%>% filter(R_DEF=="00",
-                 C_RES==1|C_RES==3,SEX==1,
-                 EDA>=15 & EDA<=98,
-                 CLASE2==3)%>%
-  summarise(PDis_H=sum(FAC_TRI))
+sdem22%>% filter(r_def=="00",
+                 c_res==1|c_res==3,sex==1,
+                 eda>=15 & eda<=98,
+                 clase2==3)%>%
+  summarise(PDis_H=sum(fac_tri))
 
 ## MUj
 
-sdem22%>% filter(R_DEF=="00",
-                 C_RES==1|C_RES==3,SEX==2,
-                 EDA>=15 & EDA<=98,
-                 CLASE2==3)%>%
-  summarise(PDis_M=sum(FAC_TRI))
+sdem22%>% filter(r_def=="00",
+                 c_res==1|c_res==3,sex==2,
+                 eda>=15 & eda<=98,
+                 clase2==3)%>%
+  summarise(PDis_M=sum(fac_tri))
 
 
 
 #PnDis
 
-sdem22%>% filter(R_DEF=="00",
-                 C_RES==1|C_RES==3,
-                 EDA>=15 & EDA<=98,
-                 CLASE2==4)%>%
-  summarise(PnDis=sum(FAC_TRI))
+sdem22%>% filter(r_def=="00",
+                 c_res==1|c_res==3,
+                 eda>=15 & eda<=98,
+                 clase2==4)%>%
+  summarise(PnDis=sum(fac_tri))
 
 ## Hom
 
-sdem22%>% filter(R_DEF=="00",
-                 C_RES==1|C_RES==3,SEX==1,
-                 EDA>=15 & EDA<=98,
-                 CLASE2==4)%>%
-  summarise(PnDis_H=sum(FAC_TRI))
+sdem22%>% filter(r_def=="00",
+                 c_res==1|c_res==3,sex==1,
+                 eda>=15 & eda<=98,
+                 clase2==4)%>%
+  summarise(PnDis_H=sum(fac_tri))
 
 ## Muj
-sdem22%>% filter(R_DEF=="00",
-                 C_RES==1|C_RES==3,SEX==2,
-                 EDA>=15 & EDA<=98,
-                 CLASE2==4)%>%
-  summarise(PnDis_M=sum(FAC_TRI))
+sdem22%>% filter(r_def=="00",
+                 c_res==1|c_res==3,sex==2,
+                 eda>=15 & eda<=98,
+                 clase2==4)%>%
+  summarise(PnDis_M=sum(fac_tri))
 
 
 # Poblaci�n total para Sonora
